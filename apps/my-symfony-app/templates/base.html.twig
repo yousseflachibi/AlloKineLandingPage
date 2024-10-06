@@ -55,7 +55,10 @@
                         <a class="page-scroll" href="#pricing">Pricing</a>
                         </li>
                         <li class="nav-item">
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" id="contactId" href="#contact">Contact</a>
+                        </li>
+                        <li class="nav-item" style="display:none">
+                            <a class="page-scroll" id="footerSubId" href="#subId">Contact</a>
                         </li>
                     </ul>
                     </div>
@@ -179,17 +182,19 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                     <!-- Single Widget -->
-                    <div class="footer-widget newsletter">
+                    <div class="footer-widget newsletter" id="subId">
                         <h5>Subscribe</h5>
                         <p>Subscribe to our newsletter for the latest updates</p>
-                        <form action="#" method="get" target="_blank" class="newsletter-form">
-                        <input name="EMAIL" placeholder="Email address" required="required" type="email" />
-                        <div class="button">
-                            <button class="sub-btn">
-                            <i class="lni lni-envelope"></i>
-                            </button>
+                        <div class="newsletter-form">
+                            <div id="temp-form-container" class="contact-form">
+                                {{ form_start(subscriptionForm, {'action': path('app_processsubform')}) }}
+                                    {{ form_row(subscriptionForm.email) }}
+                                    <button class="sub-btn" id="subButton" style="height: 100%; width: 100%; margin-top: 3px">
+                                        <i class="lni lni-envelope"></i>
+                                    </button>
+                                {{ form_end(subscriptionForm) }}
+                            </div>
                         </div>
-                        </form>
                     </div>
                     <!-- End Single Widget -->
                     </div>
