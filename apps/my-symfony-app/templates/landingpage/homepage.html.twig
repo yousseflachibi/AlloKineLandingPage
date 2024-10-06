@@ -1,6 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <!-- success msg -->
+    {% if successMSG is not empty %}
+        {% if successAction == 'con' %}
+            <script>document.getElementById('contactId').click();</script>
+        {% elseif successAction == 'sub' %}
+            <script>document.getElementById('footerSubId').click();</script>
+        {% endif %}
+        <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="removeElementpopup()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{successMSG}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <img src="images/logo-no-background_.png" id="logoXContactUS" alt="Logo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!---->
     <!-- Start header Area -->
     <section id="hero-area" class="header-area header-eight">
         <div class="container">
@@ -409,55 +435,92 @@
             <div class="col-xl-8">
             <div class="contact-form-wrapper">
                 <div class="row">
-                <div class="col-xl-10 col-lg-8 mx-auto">
-                    <div class="section-title text-center">
-                    <span> Get in Touch </span>
-                    <h2>
-                        Ready to Get Started
-                    </h2>
+                    <div class="col-xl-10 col-lg-8 mx-auto">
+                        <div class="section-title text-center">
+                        <span> Get in Touch </span>
+                        <h2>
+                            Ready to Get Started
+                        </h2>
+                        </div>
                     </div>
                 </div>
+
+                <div id="temp-form-container" class="contact-form">
+                    {{ form_start(contactForm, {'action': path('app_processcontactusform')}) }}
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(contactForm.fullName) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(contactForm.email) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(contactForm.phoneNumber) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(contactForm.city) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(contactForm.choiceList) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 margin-top-pb">
+                            {{ form_row(contactForm.description) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="button text-center rounded-buttons">
+                                <button type="submit" class="btn primary-btn rounded-full margin-top-pb">Envoyer</button>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_end(contactForm) }}
                 </div>
-                <form action="#" class="contact-form">
-                <div class="row">
-                    <div class="col-md-12">
-                    <input type="text" name="name" id="name" placeholder="Nome Complet" required />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                    <input type="email" name="email" id="email" placeholder="Email" required />
-                    </div>
-                    <div class="col-md-6">
-                    <input type="text" name="phone" id="phone" placeholder="Numéro de Téléphone" required />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                    <input type="text" name="ville" id="ville" placeholder="Ville" required />
-                    </div>
-                    <div class="col-md-6">
-                    <select id="listProfile">
-                        <option value="">Choisissez une option</option>
-                        <option value="Perte de Poids">Centre Kiné</option>
-                        <option value="Prise de Muscle">Patient</option>
-                    </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                    <div class="button text-center rounded-buttons">
-                        <button type="submit" class="btn primary-btn rounded-full">
-                        Send Message
-                        </button>
-                    </div>
-                    </div>
-                </div>
-                </form>
             </div>
             </div>
         </div>
         </div>
     </section>
     <!-- ========================= contact-section end ========================= -->
+    <style>
+    /* Optionnel : Personnalisez les styles pour les boîtes de dialogue modales ici */
+        .modal {
+            display: block;
+            background-color: rgba(0, 0, 0, 0.5); /* Ajoute un fond semi-transparent à la boîte de dialogue */
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #ffffff; /* Change la couleur de fond du contenu de la boîte de dialogue */
+            margin: auto;
+        }
+
+        .modal-dialog{
+            margin-top: 11.5rem;
+        }
+
+        .modal-body{
+            text-align : center;
+        }
+
+        #logoXContactUS{
+            height: 30px;
+        }
+
+        .margin-top-pb{
+            margin-top : 30px;
+        }
+</style>
+<script>
+    function removeElementpopup() {
+        var element = document.getElementById("exampleModal");
+        element.remove();
+    }
+</script>
 {% endblock %}
