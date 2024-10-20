@@ -94,7 +94,8 @@ class ContactUsType extends AbstractType
                 'choices' => [
                     'Choisissez une option' => '',
                     'Centre Kiné' => 'Centre Kiné',
-                    'Patient' => 'Patient'
+                    'Patient' => 'Patient',
+                    'Kiné à domicile' => 'Kiné à domicile'
                 ],
                 'attr' => [
                     'class' => 'form-control'
